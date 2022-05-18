@@ -1,0 +1,136 @@
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<style>
+    .container {
+        height: 90vh;
+        margin: 2rem;
+        display: grid;
+        width: 80%;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr 1fr;
+    }
+
+    .display-grid {
+        display: flex;
+    }
+
+    .cell {
+        color: white;
+        font-size: 3rem;
+        text-align: center;
+        padding: 4rem;
+    }
+
+    .cell-1 {
+        background: #333333;
+    }
+
+    .cell-2 {
+        background: #EFEFEF;
+    }
+
+    .cell-3 {
+        background: #72c3dc;
+    }
+
+    .cell-4 {
+        background: #2b8ead;
+    }
+
+    .cell-5 {
+        background: #6f98a8;
+    }
+
+    .cell-6 {
+        background: #bfbfbf;
+    }
+
+    .cell-7 {
+        background: #2f454e;
+    }
+
+    .cell-8 {
+        background: #6f98a8;
+    }
+
+    .cell-9 {
+        background: #72c3dc;
+    }
+
+    .buttons {
+        width: 102px;
+        height: 35px;
+        background-color: 2b8ead;
+        color: #ffff;
+        border-radius: 5px;
+        display: block;
+        margin-top: 2rem;
+    }
+
+    @media only screen and (min-width: 375px) and (max-width: 600px) {
+        .container {
+            width: 100% !important;
+            display: block;
+            margin: 0;
+        }
+
+        .cell {
+            padding: 1rem;
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .display-grid {
+            flex-direction: column-reverse !important;
+        }
+    }
+</style>
+
+<body>
+    <div class="display-grid">
+        <div class="container" id="grid"></div>
+        <div class="btn-container">
+            <input type="button" id="shuffle" class="buttons" value="suffle" onClick="shuffle()">
+            <input type="button" id="sort" class="buttons" value="sort" onClick="sort()">
+        </div>
+    </div>
+    <script>
+        let numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+        numbers.forEach(element => {
+            let div = document.createElement('div');
+            div.innerHTML = element;
+            div.classList.add(`cell`);
+            div.classList.add(`cell-${element}`);
+            document.getElementById('grid').appendChild(div);
+        });
+
+        function shuffle() {
+            let grid = document.getElementsByClassName("cell");
+            const shuffledArray = numbers.sort((a, b) => 0.5 - Math.random());
+            for (let i = 0; i < grid.length; i++) {
+                grid[i].innerHTML = shuffledArray[i];
+                grid[i].className = `cell cell-${shuffledArray[i]}`
+            }
+        }
+
+        function sort() {
+            let grid = document.getElementsByClassName("cell");
+            const sortedArray = numbers.sort(function (a, b) {
+                return a - b
+            });
+            for (let i = 0; i < grid.length; i++) {
+                grid[i].innerHTML = sortedArray[i];
+            }
+        }
+    </script>
+</body>
+
+</html>
